@@ -11,7 +11,7 @@ module.exports = opts => buf => {
 		return Promise.reject(new TypeError('Expected a buffer'));
 	}
 
-	if (!isJpg(buf) && !isPng(buf)) {
+	if (!isJpg(buf) && (!isPng(buf) || process.platform === 'win32')) {
 		return Promise.resolve(buf);
 	}
 

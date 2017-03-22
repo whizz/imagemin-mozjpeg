@@ -17,6 +17,13 @@ test('optimize a JPG', async t => {
 	t.true(isProgressive.buffer(data));
 });
 
+test('optimize a PNG', async t => {
+	const buf = await fsP.readFile(path.join(__dirname, 'fixture.png'));
+	const data = await m()(buf);
+
+	t.true(data.length <= buf.length);
+});
+
 test('support mozjpeg options', async t => {
 	const buf = await fsP.readFile(path.join(__dirname, 'fixture.jpg'));
 	const data = await m({progressive: false})(buf);
